@@ -1,0 +1,50 @@
+body {
+	height: 100%;
+	margin-top: -5px;
+}
+#first_column {
+	width: 22%;
+	float: left;
+	background-color: #B6BAC3;
+	height: 100vh;
+	position: relative;
+	padding-left: 15px;
+	margin-left: -10px;
+	padding-top: 20px;
+
+}
+
+#second_column {
+	margin-left: 23%;
+	padding-top: 30px;
+}
+
+
+#subtitle {
+	margin-top: 2%;
+	margin-left: 5%;
+	font-style: italic;
+	font-size: 15px;
+	font-family: Arial;
+}
+
+#option_list {
+	position: relative;
+	width: 95%;
+	height:27px;
+	font-size: 14px;
+	font-family: Arial;
+}
+
+#subgroups, #outcome {
+	font-family: Arial;
+}
+
+.rad {
+	margin-top: 8px;
+}
+
+h4 {
+	margin-bottom: 5px;
+	font-family: Arial;
+}

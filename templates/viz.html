@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Post Office Survey</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<script src="{{ url_for('static', filename='po_viz.js') }}"></script>
+</head>
+
+<body>
+
+	<div id="first_column">
+
+		<form id="dropdowns">
+			<h4>Survey Question Drop-Down</h4>
+			<select id='option_list' name=question>
+				{% for q in q_list %}
+				<option class='opt'>{{q}}</option>
+				{% endfor %}
+			</select>
+		</form>
+
+		<form id="subgroups">
+			<h4>Respondent Subgroup:</h4>
+			
+			<label class="lab">
+			<input type="radio" class="rad" name="subgroup" value="none" checked>
+			No Subgroup </label><br>
+
+			<label class="lab">
+			<input type="radio" class="rad" name="subgroup" value="white">
+			By Race</label><br>
+
+			<label class="lab">
+			<input type="radio" class="rad" name="subgroup" value="less45">
+			By Age</label><br>
+		</form>
+
+		<form id="outcome">
+			<h4>Outcome Format:</h4>
+
+			<label class="lab">
+			<input type="radio" class="rad" name="outcome" value="likert" checked>
+			All Response Options</label><br>
+			
+			<label class="lab">
+			<input type="radio" class="rad" name="outcome" value="proportion">
+			Proportion Agree</label><br>
+		</form>
+
+	</div>
+	
+	<div id="second_column">
+	
+		<div id="graph_can">
+			<canvas id="my_canvas"></canvas>
+		</div>
+
+		<div id="subtitle"></div>
+
+	</div>
+
+</body>
+
+
