@@ -170,7 +170,7 @@ python-engineio==3.8.2.post1
 python-socketio==4.2.0
 pytz==2018.5
 PyWavelets==1.0.0
-PyYAML==3.13
+PyYAML==5.1
 pyzmq==17.1.2
 QtAwesome==0.4.4
 qtconsole==4.4.1
