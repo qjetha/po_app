@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-	// Graph 1 - Single Bar
+	// Graph 1 - Single Bar (no subgroup, no proportion)
 	function po_graph(data, labels, title, n) {
 
 		var po_graph = new Chart(document.getElementById('my_canvas'), {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 
-	// Graph 2 - Double Bar (subgroup)
+	// Graph 2 - Double Bar (subgroup, no proportion)
 	function po_graph_dual(data_True, data_False, title, retlabels, s1, s2, s_label, nF, nT) {
 
 		var po_graph_dual = new Chart(document.getElementById("my_canvas"), {
@@ -267,10 +267,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		const request = new XMLHttpRequest();
 		request.open('POST', '/');
 
-		var question = question;
-		var outcome = outcome;
-		var subgroup = subgroup;
-
 		// Callback function on return then call graph fxn
 		request.onload = function() {
 			const data = JSON.parse(request.responseText);
@@ -279,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const return_datas = data.datas
 				const return_title = data.titles
 				const return_n = data.n
+
 				po_graph_prop(return_datas, return_title, return_n)
 			}
 			if ((subgroup=='none') && (outcome=='likert')) {
@@ -286,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const return_labels = data.labels
 				const return_title = data.titles
 				const return_n = data.n
+				
 				po_graph(return_datas, return_labels, return_title, return_n)
 			}
 			if ((subgroup!='none') && (outcome=='likert')) {
@@ -298,6 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const s_label = data.slabel
 				const nF = data.nF
 				const nT = data.nT
+				
 				po_graph_dual(data_True, data_False, return_title, return_labels, s1, s2, s_label, nF, nT)
 			}
 			if ((subgroup!='none') && (outcome!='likert')) {
@@ -309,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const s_label = data.slabel
 				const nF = data.nF
 				const nT = data.nT
+				
 				po_graph_dual_prop(data_True, data_False, return_title, s1, s2, s_label, nF, nT)	
 			}
 		}
@@ -329,36 +329,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function pre_ajax_request() {
 
-		// Remove the Canvas
+		// Transition Canvas to Opacity = 0
 		const fadeBox = document.getElementById("my_canvas");
 		fadeBox.style.opacity = 0;
 		fadeBox.style.transition = "opacity 0.1s";
+
 		fadeBox.addEventListener('webkitTransitionEnd', function(event) {
 			fadeBox.remove()
 
-			// Create New Canvas
-			var canv = document.createElement('canvas');
-			canv.id = "my_canvas"
-			document.querySelector('#graph_can').append(canv)
-
-			// Remove the Canvas and Add a New One
-			document.querySelector("#my_canvas").remove();
+			// Add a New Canvas
 			var canv = document.createElement('canvas');
 			canv.id = "my_canvas"
 			document.querySelector('#graph_can').append(canv)
 
 			// Get New Parameters Based on Radio Boxes Selected
 			var sel = document.getElementById('option_list');
-			var question= sel.options[sel.selectedIndex].text;
+			var question = sel.options[sel.selectedIndex].text;
 
 			var radios = document.querySelectorAll('input[type="radio"]:checked')
 			var sgroup = radios[0].value;
 			var outcome = radios[1].value;
 
 			ajax_request(question, outcome, sgroup)	
-
 		})
-
 	}
 
 	// Run pre-ajax request if question changes

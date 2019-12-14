@@ -1,3 +1,4 @@
 data
 do file
 sql_tables
+__pycache__
