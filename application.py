@@ -8,8 +8,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # Set up database
-conn = psycopg2.connect(host='ec2-174-129-227-146.compute-1.amazonaws.com', database='dfo8bn6dvo5jif',
-                        user='jisphegcimejgv', password='435b93240b5aaedf25a444585d9fa1ed5fc1ff7eeb2f28f20d62377865e11c3f')
+conn = psycopg2.connect(os.environ.get("DATABASE_URL"))
 cursor = conn.cursor()
 
 # Define Question List & Response Options Dictionaries
